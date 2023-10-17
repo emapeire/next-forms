@@ -1,6 +1,7 @@
 'use client'
 
 import { experimental_useFormState as useFormState } from 'react-dom'
+// @ts-expect-error
 import { useFormStatus } from 'react-dom'
 import { createTodo } from '@/app/actions'
 

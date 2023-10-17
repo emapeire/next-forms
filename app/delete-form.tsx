@@ -1,6 +1,8 @@
 'use client'
 
-import { useFormState, useFormStatus } from 'react-dom'
+import { experimental_useFormState as useFormState } from 'react-dom'
+// @ts-expect-error
+import { useFormStatus } from 'react-dom'
 import { deleteTodo } from '@/app/actions'
 
 const initialState = {

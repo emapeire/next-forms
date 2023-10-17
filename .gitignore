@@ -13,6 +13,9 @@
 /out/
 next-env.d.ts
 
+# react.js
+react.d.ts
+
 # production
 /build
 
