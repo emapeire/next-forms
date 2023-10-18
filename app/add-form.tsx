@@ -5,10 +5,7 @@ import { experimental_useFormState as useFormState } from 'react-dom'
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
 import { createTodo } from '@/app/actions'
 import { useEffect, useState } from 'react'
-
-const initialState = {
-  message: null,
-}
+import { initialState } from './utils/utils'
 
 function SubmitButton() {
   const { pending } = useFormStatus()

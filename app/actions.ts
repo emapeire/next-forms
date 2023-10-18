@@ -30,6 +30,30 @@ export async function createTodo(prevState: any, formData: FormData) {
   }
 }
 
+export async function updateTodo(prevState: any, formData: FormData) {
+  const schema = z.object({
+    id: z.string().min(1),
+    todo: z.string().min(1),
+  });
+  const data = schema.parse({
+    id: formData.get("id"),
+    todo: formData.get("todo"),
+  });
+
+  try {
+    await sql`
+      UPDATE todos
+      SET text = ${data.todo}
+      WHERE id = ${data.id};
+    `;
+
+    revalidatePath("/");
+    return { message: `Updated todo ${data.todo}`, resetInput: true };
+  } catch (e) {
+    return { message: "Failed to update todo", resetInput: false };
+  }
+}
+
 export async function deleteTodo(prevState: any, formData: FormData) {
   const schema = z.object({
     id: z.string().min(1),

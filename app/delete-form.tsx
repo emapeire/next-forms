@@ -4,10 +4,7 @@
 import { experimental_useFormState as useFormState } from 'react-dom'
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
 import { deleteTodo } from '@/app/actions'
-
-const initialState = {
-  message: null,
-}
+import { FormProps, initialState } from './utils/utils'
 
 function DeleteButton() {
   const { pending } = useFormStatus()
@@ -19,7 +16,7 @@ function DeleteButton() {
   )
 }
 
-export function DeleteForm({ id, todo }: { id: number; todo: string }) {
+export function DeleteForm({ id, todo }: FormProps) {
   const [state, formAction] = useFormState(deleteTodo, initialState)
 
   return (
