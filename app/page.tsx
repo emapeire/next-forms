@@ -18,7 +18,6 @@ export default async function Home() {
         {todos.map((todo) => (
           <li key={todo.id}>
             {todo.text}
-            <EditForm id={todo.id} todo={todo.text} />
             <DeleteForm id={todo.id} todo={todo.text} />
           </li>
         ))}
