@@ -1,6 +1,6 @@
 'use client'
 
-// @ts-expect-error
+// @ts-expect-error because it's not in the types yet
 import { experimental_useFormState as useFormState } from 'react-dom'
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
 import { createTodo } from '@/app/actions'
@@ -28,20 +28,22 @@ export function AddForm() {
   }, [state]);
 
   return (
-    <form action={formAction}>
-      <label htmlFor="todo">Enter Task</label>
-      <input
-        type="text"
-        id="todo"
-        name="todo"
-        required
-        value={inputValue}
-        onChange={(event) => setInputValue(event.target.value)}
-      />
-      <SubmitButton />
-      <p aria-live="polite" className="sr-only" role="status">
-        {state?.message}
-      </p>
-    </form>
+    <>
+      <form action={formAction}>
+        <label htmlFor="todo">Enter Task</label>
+        <input
+          type="text"
+          id="todo"
+          name="todo"
+          required
+          value={inputValue}
+          onChange={(event) => setInputValue(event.target.value)}
+        />
+        <SubmitButton />
+        <p aria-live="polite" className="sr-only" role="status">
+          {state?.message}
+        </p>
+      </form>
+    </>
   )
 }

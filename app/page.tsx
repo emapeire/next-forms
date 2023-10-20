@@ -1,13 +1,12 @@
 import { sql } from '@vercel/postgres';
 import { AddForm } from '@/app/add-form';
-import { DeleteForm } from '@/app/delete-form';
-import { EditForm } from '@/app/edit-form';
+import CardComponet from './components/card';
 
 export const runtime = 'edge';
 export const preferredRegion = 'home';
 
 export default async function Home() {
-  let data = await sql`SELECT * FROM todos`;
+  const data = await sql`SELECT * FROM todos`;
   const { rows: todos } = data;
 
   return (
@@ -17,8 +16,7 @@ export default async function Home() {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            {todo.text}
-            <DeleteForm id={todo.id} todo={todo.text} />
+            <CardComponet id={todo.id} todo={todo.text} />
           </li>
         ))}
       </ul>

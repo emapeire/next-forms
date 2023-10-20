@@ -9,7 +9,7 @@ import { z } from "zod";
 //   text TEXT NOT NULL
 // );
 
-export async function createTodo(prevState: any, formData: FormData) {
+export async function createTodo(prevState: never, formData: FormData) {
   const schema = z.object({
     todo: z.string().min(1),
   });
@@ -30,7 +30,7 @@ export async function createTodo(prevState: any, formData: FormData) {
   }
 }
 
-export async function updateTodo(prevState: any, formData: FormData) {
+export async function updateTodo(prevState: never, formData: FormData) {
   const schema = z.object({
     id: z.string().min(1),
     todo: z.string().min(1),
@@ -54,7 +54,7 @@ export async function updateTodo(prevState: any, formData: FormData) {
   }
 }
 
-export async function deleteTodo(prevState: any, formData: FormData) {
+export async function deleteTodo(prevState: never, formData: FormData) {
   const schema = z.object({
     id: z.string().min(1),
     todo: z.string().min(1),
