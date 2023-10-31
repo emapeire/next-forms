@@ -1,8 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { sql } from "@vercel/postgres";
 import { z } from "zod";
+import { supabase } from "./lib/supabase-client";
+// import { sql } from "@vercel/postgres";
 
 // CREATE TABLE todos (
 //   id SERIAL PRIMARY KEY,
@@ -18,10 +19,16 @@ export async function createTodo(prevState: never, formData: FormData) {
   });
 
   try {
-    await sql`
-    INSERT INTO todos (text)
-    VALUES (${data.todo})
-  `;
+    // await sql`
+    //   INSERT INTO todos (text)
+    //   VALUES (${data.todo})
+    // `;
+
+    const { error } = await supabase
+      .from("todos")
+      .insert([{ text: data.todo }]);
+
+    if (error) throw error;
 
     revalidatePath("/");
     return { message: `Added todo ${data.todo}`, resetInput: true };
@@ -41,11 +48,18 @@ export async function updateTodo(prevState: never, formData: FormData) {
   });
 
   try {
-    await sql`
-      UPDATE todos
-      SET text = ${data.todo}
-      WHERE id = ${data.id};
-    `;
+    // await sql`
+    //   UPDATE todos
+    //   SET text = ${data.todo}
+    //   WHERE id = ${data.id};
+    // `;
+
+    const { error } = await supabase
+      .from("todos")
+      .update({ text: data.todo })
+      .eq("id", data.id);
+
+    if (error) throw error;
 
     revalidatePath("/");
     return { message: `Updated todo ${data.todo}`, resetInput: true };
@@ -65,10 +79,14 @@ export async function deleteTodo(prevState: never, formData: FormData) {
   });
 
   try {
-    await sql`
-      DELETE FROM todos
-      WHERE id = ${data.id};
-    `;
+    // await sql`
+    //   DELETE FROM todos
+    //   WHERE id = ${data.id};
+    // `;
+
+    const { error } = await supabase.from("todos").delete().eq("id", data.id);
+
+    if (error) throw error;
 
     revalidatePath("/");
     return { message: `Deleted todo ${data.todo}` };
