@@ -1,8 +1,6 @@
 'use client'
 
-// @ts-expect-error becuase it's not in the types yet
-import { experimental_useFormState as useFormState } from 'react-dom'
-import { experimental_useFormStatus as useFormStatus } from 'react-dom'
+import { useFormState, useFormStatus } from 'react-dom';
 import { deleteTodo } from '@/app/actions'
 import { FormProps, initialState } from './utils/utils'
 
